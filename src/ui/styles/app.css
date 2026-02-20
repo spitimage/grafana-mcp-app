@@ -1,0 +1,285 @@
+/*
+ * Copyright 2026 Grafana MCP App Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ===================================================================
+   Theme Variables
+   =================================================================== */
+
+:root {
+  /* Light theme (default) */
+  --grafana-bg: #f4f5f5;
+  --grafana-fg: #141619;
+  --grafana-border: #d8d9da;
+  --grafana-accent: #3871dc;
+  --grafana-error: #e02f44;
+  --grafana-warning: #ff9830;
+  --grafana-success: #73bf69;
+  --grafana-control-bg: #ffffff;
+  --grafana-control-border: #c7d0d9;
+  --grafana-hover: #e6e9ed;
+}
+
+[data-theme="dark"] {
+  --grafana-bg: #141619;
+  --grafana-fg: #d8d9da;
+  --grafana-border: #3d3d3d;
+  --grafana-accent: #5794f2;
+  --grafana-error: #e02f44;
+  --grafana-warning: #ff9830;
+  --grafana-success: #73bf69;
+  --grafana-control-bg: #1f1f23;
+  --grafana-control-border: #3d3d3d;
+  --grafana-hover: #2a2a2f;
+}
+
+/* ===================================================================
+   Base Styles
+   =================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  background: var(--grafana-bg);
+  color: var(--grafana-fg);
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ===================================================================
+   Status Banner
+   =================================================================== */
+
+#status-banner {
+  display: none;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--grafana-border);
+  flex-shrink: 0;
+}
+
+.status-banner.status-loading {
+  background-color: var(--grafana-accent);
+  color: white;
+  display: block;
+}
+
+.status-banner.status-error {
+  background-color: var(--grafana-error);
+  color: white;
+  display: block;
+}
+
+.status-banner.status-warning {
+  background-color: var(--grafana-warning);
+  color: white;
+  display: block;
+}
+
+.status-banner.status-info {
+  background-color: var(--grafana-success);
+  color: white;
+  display: block;
+}
+
+/* ===================================================================
+   Control Bar
+   =================================================================== */
+
+#control-bar {
+  flex-shrink: 0;
+  background: var(--grafana-bg);
+  border-bottom: 1px solid var(--grafana-border);
+  min-height: 40px;
+}
+
+.control-bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 12px;
+}
+
+.control-bar-left {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+}
+
+.control-bar-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-group label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--grafana-fg);
+  white-space: nowrap;
+}
+
+.control-select {
+  padding: 4px 8px;
+  font-size: 13px;
+  border: 1px solid var(--grafana-control-border);
+  border-radius: 2px;
+  background: var(--grafana-control-bg);
+  color: var(--grafana-fg);
+  cursor: pointer;
+  min-width: 120px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.control-select:hover {
+  background: var(--grafana-hover);
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: var(--grafana-accent);
+  box-shadow: 0 0 0 1px var(--grafana-accent);
+}
+
+.time-select {
+  min-width: 150px;
+}
+
+.variable-select[multiple] {
+  min-height: 60px;
+}
+
+/* ===================================================================
+   Panel Container
+   =================================================================== */
+
+#panel-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--grafana-bg);
+}
+
+#grafana-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ===================================================================
+   Fallback Container
+   =================================================================== */
+
+#fallback-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--grafana-bg);
+  overflow: auto;
+}
+
+#fallback-image {
+  max-width: 100%;
+  max-height: calc(100% - 60px);
+  border: 1px solid var(--grafana-border);
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#fallback-caption {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--grafana-control-bg);
+  border: 1px solid var(--grafana-border);
+  border-radius: 2px;
+  font-size: 13px;
+  color: var(--grafana-fg);
+  text-align: center;
+  max-width: 600px;
+}
+
+/* ===================================================================
+   Responsive Adjustments
+   =================================================================== */
+
+@media (max-width: 768px) {
+  .control-bar-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control-bar-left,
+  .control-bar-right {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .control-group {
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .control-select {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ===================================================================
+   Loading States
+   =================================================================== */
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.status-loading::before {
+  content: "⏳ ";
+  animation: pulse 1.5s ease-in-out infinite;
+}

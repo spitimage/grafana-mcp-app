@@ -1,0 +1,58 @@
+{
+  "name": "grafana-mcp-app",
+  "version": "1.0.0",
+  "description": "MCP App for embedding interactive Grafana panels with time range and variable controls",
+  "main": "dist/src/server/main.js",
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc --noEmit && tsc -p tsconfig.server.json && cross-env INPUT=src/ui/grafana-panel.html vite build",
+    "dev": "concurrently \"cross-env NODE_ENV=development INPUT=src/ui/grafana-panel.html vite build --watch\" \"tsx watch src/server/main.ts\"",
+    "start": "node dist/src/server/main.js",
+    "bridge": "node stdio-bridge.js",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit",
+    "setup:grafana": "node scripts/setup-grafana.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-app",
+    "grafana",
+    "observability",
+    "monitoring",
+    "dashboards",
+    "visualization"
+  ],
+  "author": "Grafana MCP App Contributors",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spitimage/grafana-mcp-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spitimage/grafana-mcp-app/issues"
+  },
+  "homepage": "https://github.com/spitimage/grafana-mcp-app#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^1.0.1",
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.0",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-singlefile": "^2.3.0",
+    "vitest": "^4.0.18"
+  }
+}
